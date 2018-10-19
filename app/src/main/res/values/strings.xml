@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TestAppliction</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exception_message">Image not selected</string>
+    <string name="msg_perms_needed">The app can not work properly without having all these permissions.</string>
+    <string name="btn_quit">Quit</string>
+    <string name="btn_accept">Accept</string>
+</resources>
