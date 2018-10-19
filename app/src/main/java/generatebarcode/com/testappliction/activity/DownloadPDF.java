@@ -1,7 +1,10 @@
 package generatebarcode.com.testappliction.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,6 +19,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +63,6 @@ public class DownloadPDF extends AppCompatActivity {
         //  editUrl.setText("http://2.imimg.com/data2/LQ/QV/MY-/teddy-small-size-500x500.jpg");
         editUrl.setText("https://www.hdwallpapers.in/download/emma_watson_hd_quality-normal.jpg");
         context = this;
-
     }
 
     private static File getStorageDir() {
@@ -69,6 +72,14 @@ public class DownloadPDF extends AppCompatActivity {
         }
         return docsFolder;
     }
+    private static Boolean getStorageDirCheck(String dir) {
+        Boolean bool = false;
+        File docsFolder = new File(dir);
+        if (docsFolder.exists()) {
+            bool = true;
+        }
+        return bool;
+    }
 
     public void downloadFile(View view) {
         String url = editUrl.getText().toString();
@@ -77,9 +88,13 @@ public class DownloadPDF extends AppCompatActivity {
                 String[] arr = url.split("/");
                 storeDir = getStorageDir() + "/" + arr[arr.length - 1];
                 if (isNetworkAvailable(DownloadPDF.this)) {
-                    status.setText("Wait...");
-                    BackTask bt = new BackTask();
-                    bt.execute(url);
+                    if (getStorageDirCheck(storeDir)){
+                        openDialog(url);
+                    }else {
+                        status.setText("Wait...");
+                        BackTask bt = new BackTask();
+                        bt.execute(url);
+                    }
                 } else {
                     Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Please Check your internet connection...!!!", Snackbar.LENGTH_SHORT);
                     snackbar1.show();
@@ -214,6 +229,32 @@ public class DownloadPDF extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void openDialog(final String url) {
+        final Dialog dialog = new Dialog(context); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setTitle("Already");
+        TextView dialog_info = dialog.findViewById(R.id.dialog_info);
+        Button dialog_cancel = dialog.findViewById(R.id.dialog_cancel);
+        Button dialog_ok = dialog.findViewById(R.id.dialog_ok);
+        dialog_info.setText("File Already Exits!\n\nDo you want to replace?");
+        dialog_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                status.setText("Wait...");
+                BackTask bt = new BackTask();
+                bt.execute(url);
+                dialog.dismiss();
+            }
+        });
+        dialog_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
 
