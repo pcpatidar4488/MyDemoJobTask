@@ -32,6 +32,7 @@ import butterknife.ButterKnife;
 import generatebarcode.com.testappliction.R;
 
 import static generatebarcode.com.testappliction.utils.Helpers.isNetworkAvailable;
+
 /**
  * Created by punamchand on 18-Oct-18.
  */
@@ -44,6 +45,10 @@ public class DownloadPDF extends AppCompatActivity {
     CoordinatorLayout coordinatorLayout;
     @Bind(R.id.status)
     TextView status;
+    @Bind(R.id.pathTxt)
+    TextView pathTxt;
+    @Bind(R.id.txt)
+    TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,7 @@ public class DownloadPDF extends AppCompatActivity {
     public void downloadFile(View view) {
         String url = editUrl.getText().toString();
         if (!url.equals("")) {
-            if (url.contains("http")){
+            if (url.contains("http")) {
                 String[] arr = url.split("/");
                 storeDir = getStorageDir() + "/" + arr[arr.length - 1];
                 if (isNetworkAvailable(DownloadPDF.this)) {
@@ -79,7 +84,7 @@ public class DownloadPDF extends AppCompatActivity {
                     Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Please Check your internet connection...!!!", Snackbar.LENGTH_SHORT);
                     snackbar1.show();
                 }
-            }else {
+            } else {
                 Toast.makeText(context, "Please enter http url", Toast.LENGTH_LONG).show();
             }
         } else {
@@ -156,10 +161,10 @@ public class DownloadPDF extends AppCompatActivity {
             mBuilder.setProgress(100, progress[0], false);
             // Displays the progress bar on notification
             mNotifyManager.notify(0, mBuilder.build());
-            if (progress[0]==100){
-                updateDownload("Download completed "+progress[0]);
-            }else {
-                updateDownload("Downloading "+progress[0]);
+            if (progress[0] == 100) {
+                updateDownload("Download completed " + progress[0]);
+            } else {
+                updateDownload("Downloading " + progress[0]);
             }
         }
 
@@ -173,6 +178,9 @@ public class DownloadPDF extends AppCompatActivity {
             Toast.makeText(context, "Download complete", Toast.LENGTH_SHORT).show();
             mBuilder.setProgress(0, 0, false);
             mNotifyManager.notify(0, mBuilder.build());
+            txt.setVisibility(View.VISIBLE);
+            pathTxt.setVisibility(View.VISIBLE);
+            pathTxt.setText(storeDir);
         }
     }
 

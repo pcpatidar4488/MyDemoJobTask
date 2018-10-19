@@ -70,5 +70,31 @@
             android:onClick="downloadFile"
             android:text="Download" />
 
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txt"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:text="Saved Fille Path"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btdownload"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/pathTxt"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:text=""
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt"
+            android:background="#e2e2e2"
+            android:padding="20dp"
+            android:textColor="@color/premiumcolor"/>
+
+
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

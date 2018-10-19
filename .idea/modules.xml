@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AntefTechnoTask.iml" filepath="$PROJECT_DIR$/AntefTechnoTask.iml" />
+      <module fileurl="file://C:\Users\manjoor\Desktop\MyDemoJobTask\AntefTechnoTask.iml" filepath="C:\Users\manjoor\Desktop\MyDemoJobTask\AntefTechnoTask.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyDemoJobTask.iml" filepath="$PROJECT_DIR$/MyDemoJobTask.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\manjoor\Desktop\MyDemoJobTask\app\app.iml" filepath="C:\Users\manjoor\Desktop\MyDemoJobTask\app\app.iml" />
     </modules>
   </component>
 </project>

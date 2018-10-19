@@ -122,7 +122,7 @@ public class FirstFragment extends Fragment {
                 if (!encodedString.equals("")){
                     if (Helpers.isNetworkAvailable(getActivity())){
                         mProgressDialog = new ProgressDialog(getActivity());
-                        mProgressDialog.setMessage("Wait...");
+                        mProgressDialog.setMessage("Wait Image sending...");
                         mProgressDialog.setIndeterminate(false);
                         mProgressDialog.setCancelable(true);
 
